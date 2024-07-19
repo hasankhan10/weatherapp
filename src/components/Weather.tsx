@@ -67,7 +67,7 @@ function Weather() {
             <input className=" w-[60%] h-10 outline-none px-2 py-2 rounded-md text-center" placeholder="Enter Location" type="text" ref={inputRef} />
             <button onClick={handleApi} className=" px-2 py-2 bg-blue-600 rounded-md" >Check</button>
         </section>
-        <div className="wetherdata w-full h-fit bg-yellow-400 rounded-md sm:py-6 py-10">
+        <div className="wetherdata w-full h-fit bg-red-400 rounded-md sm:py-6 py-10">
             <div className="currenttemp w-full h-[50%] flex">
                 <h1 className=" w-1/2 h-full sm:text-7xl text-5xl font-semibold flex justify-center items-center">{weatherData.temparature} <sup>o</sup>C</h1>
                 <section className="w-1/2 h-full flex justify-center items-center flex-col">
