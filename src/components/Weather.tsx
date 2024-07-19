@@ -9,7 +9,7 @@ interface WeatherData {
     country:string;
     localtime:string;
     windspeed:string;
-    humadity:string;
+    humidity:string;
     feelslike:string;
 }
 function Weather() {
@@ -23,7 +23,7 @@ function Weather() {
         country:"",
         localtime:"",
         windspeed:"",
-        humadity:"",
+        humidity:"",
         feelslike:""
     })
     const handleApi = async()=>{
@@ -32,20 +32,20 @@ function Weather() {
 
         if(inputValue){
             try {
-                const response =  await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${inputValue}?unitGroup=metric&key=F7WU8NTGTJKUPXECQE8QUL7K6&contentType=json`)
+                const response =  await fetch(`https://api.weatherapi.com/v1/current.json?key=b0cb09abd8bf40b08fa100009242504&q=${inputValue}&aqi=no`)
                 const data = await response.json()    
-                console.log(data);
+                // console.log(data);
                 const getData:WeatherData = {
-                    temparature:data.currentConditions.temp.toString(),
-                    tempmood:data.currentConditions.conditions,
-                    tempmoodimg:data.currentConditions.icon,
-                    location:data.address,
-                    region:data.resolvedAddress.split(",")[1],
-                    country:data.resolvedAddress.split(",")[2],
-                    localtime:data.currentConditions.datetime,
-                    windspeed:data.currentConditions.windspeed,
-                    humadity:data.currentConditions.humidity,
-                    feelslike:data.currentConditions.feelslike
+                    temparature:data.current.temp_c.toString(),
+                    tempmood:data.current.condition.text,
+                    tempmoodimg:data.current.condition.icon,
+                    location:data.location.name,
+                    region:data.location.region,
+                    country:data.location.country,
+                    localtime:data.location.localtime,
+                    windspeed:data.current.wind_kph.toString(),
+                    humidity:data.current.humidity.toString(),
+                    feelslike:data.current.feelslike_c.toString()
                 }
                 setWeatherData(getData)
                 if(inputRef.current){
@@ -87,7 +87,7 @@ function Weather() {
                 <section className=" w-[40%] h-full py-2">
                     <ul>
                         <li><span className=" font-bold">Wind Speed:</span> {weatherData.windspeed}</li>
-                        <li><span className=" font-bold">humidity:</span> {weatherData.humadity}</li>
+                        <li><span className=" font-bold">humidity:</span> {weatherData.humidity}</li>
                         <li><span className=" font-bold">feelslike:</span> {weatherData.feelslike}</li>
                     </ul>
                 </section>
